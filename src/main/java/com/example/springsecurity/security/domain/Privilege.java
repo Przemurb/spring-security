@@ -1,9 +1,14 @@
 package com.example.springsecurity.security.domain;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Privilege {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,6 +17,7 @@ public class Privilege {
     @ManyToMany(mappedBy = "privileges")
     private Collection<Role> roles;
 
+    public Privilege(String name) {
 
-
+    }
 }

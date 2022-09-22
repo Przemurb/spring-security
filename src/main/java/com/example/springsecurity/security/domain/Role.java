@@ -1,6 +1,7 @@
 package com.example.springsecurity.security.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Role {
 
     @Id
@@ -20,4 +22,8 @@ public class Role {
             inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id")
     )
     private List<Privilege> privileges = new ArrayList<>();
+
+    public Role(String name) {
+        this.name = name;
+    }
 }
