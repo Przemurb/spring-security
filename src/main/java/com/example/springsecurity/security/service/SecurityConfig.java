@@ -18,16 +18,23 @@ import org.springframework.security.web.SecurityFilterChain;
 //@EnableWebSecurity
 public class SecurityConfig {
 
+    private final CustomAuthFailureHandler customAuthFailureHandler;
+
+    public SecurityConfig(CustomAuthFailureHandler customAuthFailureHandler) {
+        this.customAuthFailureHandler = customAuthFailureHandler;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> request
-                .antMatchers( "/", "/login*", "/h2-console/**").permitAll()
+                .antMatchers( "/", "/login*", "/home", "/h2-console/**").permitAll()
                 .anyRequest().authenticated());
-        http.formLogin().loginPage("/login");
+        http.formLogin().loginPage("/login")
+                .failureForwardUrl("/login?error=true")
+                .failureHandler(customAuthFailureHandler);
         http.csrf().disable().headers().frameOptions().sameOrigin();
         return http.build();
     }
-
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
