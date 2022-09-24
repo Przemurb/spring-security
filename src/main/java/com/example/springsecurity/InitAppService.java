@@ -48,6 +48,7 @@ public class InitAppService {
         final Privilege readPrivilege = newPrivilege("ROLE_READ_PRIVILEGE");
         final Privilege writePrivilege = newPrivilege("ROLE_WRITE_PRIVILEGE");
         final Privilege apiReadPrivilege = newPrivilege("ROLE_API_READ_PRIVILEGE");
+
         final List<Privilege> adminPrivileges = new ArrayList<>(Arrays.asList(readPrivilege, writePrivilege, apiReadPrivilege));
         final List<Privilege> userPrivileges = new ArrayList<>(List.of(readPrivilege));
 
@@ -86,13 +87,14 @@ public class InitAppService {
         userCreator(roleAdmin, ADMIN_USER, ADMIN_PASSWORD, ADMIN_FIRST_NAME, ADMIN_LAST_NAME);
     }
 
-    private void userCreator(Role roleAdmin, String adminUser, String adminPassword, String adminFirstName, String adminLastName) {
+    private void userCreator(Role role, String adminUser, String password, String firstName, String lastName) {
         User user = new User();
         user.setEmail(adminUser);
-        user.setPassword(passwordEncoder.encode(adminPassword));
-        user.getRoles().add(roleAdmin);
-        user.setFirstName(adminFirstName);
-        user.setLastName(adminLastName);
+//        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
+        user.getRoles().add(role);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
         user.setEnabled(true);
         userRepository.save(user);
     }

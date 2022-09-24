@@ -1,0 +1,23 @@
+.container {
+    margin: 50px auto 50px;
+    display: table;
+    flex-direction: column;
+    text-align: right;
+    font-family: Arial, serif;
+}
+.form-input {
+    margin: 15px 0 0 15px;
+}
+.title {
+    text-align: center;
+    font-family: "Apple Chancery", serif;
+}
+.form-button {
+    margin: 20px 0 0 15px;
+}
+.error-message {
+    color: red;
+    text-align: center;
+    margin: 0 auto;
+
+}
