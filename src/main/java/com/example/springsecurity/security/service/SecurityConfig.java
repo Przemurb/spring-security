@@ -39,13 +39,11 @@ public class SecurityConfig {
 
     private final CustomAuthFailureHandler customAuthFailureHandler;
     private final CustomAuthSuccessHandler customAuthSuccessHandler;
-    private final CustomUserDetailService userDetailsService;
 
     public SecurityConfig(CustomAuthFailureHandler customAuthFailureHandler,
-                          CustomAuthSuccessHandler customAuthSuccessHandler, CustomUserDetailService userDetailsService) {
+                          CustomAuthSuccessHandler customAuthSuccessHandler) {
         this.customAuthFailureHandler = customAuthFailureHandler;
         this.customAuthSuccessHandler = customAuthSuccessHandler;
-        this.userDetailsService = userDetailsService;
     }
 
     @Bean
@@ -71,23 +69,5 @@ public class SecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    //    --------------------------------------
-
-//    @Bean
-//    public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
-//        return http.getSharedObject(AuthenticationManagerBuilder.class)
-//                .userDetailsService(userDetailsService)
-//                .passwordEncoder(bCryptPasswordEncoder)
-//                .and().build();
-//    }
-
-//    @Bean
-//    public DaoAuthenticationProvider authProvider() {
-//        final CustomAuthenticationProvider authenticationProvider = new CustomAuthenticationProvider();
-//        authenticationProvider.setUserDetailsService(userDetailsService);
-//        authenticationProvider.setPasswordEncoder(passwordEncoder());
-//        return authenticationProvider;
-//    }
-
 }
+

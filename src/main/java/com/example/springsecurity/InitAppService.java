@@ -90,7 +90,6 @@ public class InitAppService {
     private void userCreator(Role role, String adminUser, String password, String firstName, String lastName) {
         User user = new User();
         user.setEmail(adminUser);
-//        user.setPassword(password);
         user.setPassword(passwordEncoder.encode(password));
         user.getRoles().add(role);
         user.setFirstName(firstName);
