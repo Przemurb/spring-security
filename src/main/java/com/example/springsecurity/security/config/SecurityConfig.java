@@ -1,6 +1,9 @@
-package com.example.springsecurity.security.service;
+package com.example.springsecurity.security.config;
 
 
+import com.example.springsecurity.security.CustomAuthFailureHandler;
+import com.example.springsecurity.security.CustomAuthSuccessHandler;
+import com.example.springsecurity.security.CustomLogoutSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

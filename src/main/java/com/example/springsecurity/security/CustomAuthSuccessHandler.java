@@ -1,4 +1,4 @@
-package com.example.springsecurity.security.service;
+package com.example.springsecurity.security;
 
 import com.example.springsecurity.security.domain.CurrentUser;
 import com.example.springsecurity.security.domain.User;

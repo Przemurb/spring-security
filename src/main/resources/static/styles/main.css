@@ -8,6 +8,10 @@
 .form-input {
     margin: 15px 0 0 15px;
 }
+.api-link{
+    margin: 50px auto 50px;
+    font-family: Arial, serif;
+}
 .title {
     text-align: center;
     font-family: "Apple Chancery", serif;
@@ -19,5 +23,4 @@
     color: red;
     text-align: center;
     margin: 0 auto;
-
 }

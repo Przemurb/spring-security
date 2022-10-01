@@ -1,5 +1,6 @@
 package com.example.springsecurity.security.domain;
 
+import com.example.springsecurity.security.api.UserResponseDto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -29,5 +30,9 @@ public class User {
 
     public User() {
         this.enabled = false;
+    }
+
+    public UserResponseDto toDto() {
+        return new UserResponseDto(firstName, lastName);
     }
 }

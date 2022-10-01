@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona dostępu do API</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}">
+</head>
+<body>
+<div class="api-link">
+    <h1 class="title" th:text="|Heja ${session.user}|">Heja użytkowniku</h1>
+    <div class="form-input">
+        GET /api/users do UserApi&nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a href="/api/users">getUsers()</a><br/>
+        GET /api/users/multi do UserApi&nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a href="/api/users/multi">getUsersMultiRoles()</a><br/>
+        GET /api/users/pre do UserApi, użytkownik <i>admin</i> &nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a
+            href="/api/users/pre/admin">getUserPreAuth(@PathVariable String username)</a><br/>
+        GET /api/users/pre do UserApi, użytkownik <i>user</i> &nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a
+            href="/api/users/pre/user">getUserPreAuth(@PathVariable String username)</a><br/><br/>
+    </div>
+    <form class="form-button" th:action="@{/logout}" method="post">
+        <input type="submit" value="Wyloguj się">
+    </form>
+</div>
+
+</body>
+</html>

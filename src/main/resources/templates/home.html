@@ -7,8 +7,10 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="title">Witaj!</h1>
-
+    <h1 class="title" th:text="|Witaj ${session.user}!|">Witaj!</h1>
+    <p>
+        <a href ="#" th:href="@{/hello}">Kliknij tu</a> aby zobaczyć listę API
+    </p>
 </div>
 </body>
 </html>
