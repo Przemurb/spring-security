@@ -31,4 +31,24 @@ public class UserApi {
     public UserResponseDto getUserPreAuth(@PathVariable String username) {
         return userService.getUserPreAuth(username);
     }
+
+    @GetMapping("/secured/{username}")
+    public UserResponseDto getUserSecured(@PathVariable String username) {
+        return userService.getUserSecured(username);
+    }
+
+    @GetMapping("/secured/multi/{username}")
+    public UserResponseDto getUserSecuredMultiRoles(@PathVariable String username) {
+        return userService.getUserSecuredMultiRoles(username);
+    }
+
+    @GetMapping("/jsr250/{username}")
+    public UserResponseDto getUserJsr250(@PathVariable String username) {
+        return userService.getUserJsr250(username);
+    }
+
+    @GetMapping("/jsr250/multi/{username}")
+    public UserResponseDto getUserJsr250MultiRoles(@PathVariable String username) {
+        return userService.getUserJsr250MultiRoles(username);
+    }
 }

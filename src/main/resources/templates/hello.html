@@ -11,10 +11,23 @@
     <div class="form-input">
         GET /api/users do UserApi&nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a href="/api/users">getUsers()</a><br/>
         GET /api/users/multi do UserApi&nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a href="/api/users/multi">getUsersMultiRoles()</a><br/>
+        </br>
         GET /api/users/pre do UserApi, użytkownik <i>admin</i> &nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a
             href="/api/users/pre/admin">getUserPreAuth(@PathVariable String username)</a><br/>
         GET /api/users/pre do UserApi, użytkownik <i>user</i> &nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a
-            href="/api/users/pre/user">getUserPreAuth(@PathVariable String username)</a><br/><br/>
+            href="/api/users/pre/user">getUserPreAuth(@PathVariable String username)</a><br/>
+        <br/>
+        GET /api/users/secured do UserApi &nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a
+            href="/api/users/secured/admin">getUserSecured(@PathVariable String username)</a><br/>
+        GET /api/users/secured/multi do UserApi  &nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a
+            href="/api/users/secured/multi/user">getUserSecuredMultiRoles(@PathVariable String username)</a><br/>
+        </br>
+        GET /api/users/jsr250 do UserApi &nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a
+            href="/api/users/secured/user">getUserJsr250(@PathVariable String username)</a><br/>
+        GET /api/users/jsr250/multi do UserApi  &nbsp;&nbsp;&nbsp;>>>&nbsp;&nbsp;&nbsp; <a
+            href="/api/users/secured/multi/user">getUserJsr250MultiRoles(@PathVariable String username)</a><br/>
+
+        <br/>
     </div>
     <form class="form-button" th:action="@{/logout}" method="post">
         <input type="submit" value="Wyloguj się">
