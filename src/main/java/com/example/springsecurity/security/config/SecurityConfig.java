@@ -12,6 +12,20 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.WebUtils;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Configuration
 @EnableGlobalMethodSecurity(
@@ -34,7 +48,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().headers().frameOptions().sameOrigin();
+//        http.csrf().disable().headers().frameOptions().sameOrigin();
+        http.csrf()
+                .csrfTokenRepository(csrfTokenRepository())
+                .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+                .headers().frameOptions().sameOrigin();
         http.authorizeRequests()
                 .antMatchers("/login*", "/home", "/h2-console/**").permitAll()
                 .anyRequest().authenticated();
@@ -59,6 +77,32 @@ public class SecurityConfig {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    //    ------------------------------ CSRF ---------------------------
+    Filter csrfHeaderFilter() {
+        return new OncePerRequestFilter() {
+            @Override
+            protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+                CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+                if (csrf != null) {
+                    Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
+                    String token = csrf.getToken();
+                    if (cookie == null || token != null && !token.equals(cookie.getValue())) {
+                        cookie = new Cookie("XSRF-TOKEN", token);
+                        cookie.setPath("/"); //nazwa domeny
+                        response.addCookie(cookie);
+                    }
+                }
+                filterChain.doFilter(request, response);
+            }
+        };
+    }
+
+    CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+        repository.setHeaderName("X-XSRF-TOKEN");
+        return repository;
     }
 }
 
